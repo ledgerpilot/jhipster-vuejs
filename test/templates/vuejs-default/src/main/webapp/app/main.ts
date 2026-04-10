@@ -35,6 +35,12 @@ Vue.use(Vue2Filters);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.component('jhi-item-count', JhiItemCountComponent);
 
+// Add Axios response interceptor to convert ISO 8601 date strings to Date objects
+axios.interceptors.response.use(response => {
+  convertDates(response.data);
+  return response;
+});
+
 const i18n = config.initI18N(Vue);
 const store = config.initVueXStore(Vue);
 
